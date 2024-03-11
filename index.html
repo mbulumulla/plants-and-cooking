@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon source: https://favicon.io/emoji-favicons/herb/ -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://unpkg.com/scrollama"></script>
+    <!-- Our  Styles -->
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+    <!-- configuring scrollama -->
+    <script src="../scrollama.min.js"></script>
+
+
+    <title>Plant Your Own Produce</title>
+</head>
+
+
+<body>
+
+    <div id="title-div">
+        <div class="title-author">
+            <h1>Plant Your Own Produce</h1>
+            <p class="author">Medha Bulumulla, Hannah Rudt, Brett Schlesinger</p>
+        </div>
+        <p class="scroll-text author">Scroll to grow</p>
+    </div>
+
+<!-- <h2>Medha Bulumulla, Hannah Rudt, Brett Schlesinger</h2> -->
+
+
+<section id="scrolly">
+    <article>
+        <div id="text-div1">
+            <div class="step" data-step="0">
+                <p class="writing2"><b>Home gardening</b> is not a new phenomenon in the United States. Colonial kitchen
+                    gardens provided the
+                    majority of fresh produce for colonists in the 17th and 18th centuries (National Gallery of Art,
+                    2021); "slave patches" of enslaved African Americans were necessary for supplementary nutrition and
+                    cultural continuation (Eisnach & Covey, 2019); victory gardens augmented rations during WWI and
+                    represented patriotic support during the 1940s (Virginia Museum of History & Culture).
+                </p>
+
+                <div class="step" data-step="1" id="image-div">
+                    <figure>
+                        <img class = "garden" src="images/colonial-copy.jpg" alt="Colonial kitchen garden.">
+                        <figcaption>Model of a colonial kitchen garden. <br> Source: <a
+                                href="https://colonialquills.blogspot.com/2017/08/colonial-kitchen-gardens-by-cynthia.html"
+                                target="_blank">Cynthia Howerter</a></figcaption>
+                    </figure>
+                </div> 
+            </div>
+        </div> 
+
+        <div id="text-div2">
+            <p class="writing2"> Today, <b>55% of Americans</b> engage in home gardening activities (Mayers, 2023;
+                    Miracle-Gro, 2021). This article uses garden and recipe data to help you plant your own produce section. From popular veggies and compatible plants to soil temperatures and harvest instructions, you will have all the information you need to successfully grow ingredients in your home garden.</p>
+
+            <img class="scroll-text2" id="arrow1" src="images/down-arrow.png" alt="Scroll down arrow" height="40px" width="40px">
+            <!-- <p class="scroll-text2 author">Scroll to continue</p> -->
+        </div>
+        
+    
+        <!-- ---- BAR CHART ---- -->
+        <div class="flex" id="barID">
+            <div>
+                <div class="step" data-step="2">
+                    <h2>In-Demand Delicacies</h2>
+                    <p class = "descrip">The most popular plants in Epicurious recipes. <strong>Mouse over</strong> to learn more.</p>
+                </div>
+                <div class="step" data-step="3">
+                    <svg id="bar" height="400" width="800"></svg>
+                </div>
+            </div>
+
+            <img class="scroll-text2" id="arrow2" src="images/down-arrow.png" alt="Scroll down arrow" height="40px" width="40px">
+        </div>
+
+    </article>
+</section>
+
+<div id="text-div3">
+    <p class="writing2">Growing your own plants can be a difficult but rewarding experience. By tending to a home
+        garden, you can reduce your carbon footprint from food products. The Environmental Protection Agency reports that 10% of all greenhouse gases in the US come from the Agricultural sector, 
+        which does not include transportation of the food (<a href = "https://www.epa.gov/ghgemissions/sources-greenhouse-gas-emissions" target="_blank">EPA</a>). Choosing a handful of staple edible plants for your home decreases your emissions and increases your connection to the food that ends up on your plate. 
+    </p>    
+
+    <p class="writing2" id="writing2id">Many gardeners rely on plant compatibilities to optimize their garden space. By choosing compatible plants, you can reduce your input costs and ensure a successful garden (<a href = "https://www.gardeningknowhow.com/edible/vegetables/vgen/incompatible-garden-plants.htm" target="_blank">Gardening Know How</a>); you will no longer have to buy your staple vegetables and herbs. Home gardens also contribute to environmental health by housing diverse ecosystems that sustain carbon, nitrogen, and water cycles (<a href = "http://nmsp.cals.cornell.edu/publications/factsheets/factsheet91.pdf" target="_blank">Cornell Cooperative Extension</a>).
+ 
+        
+    <p class="writing2">The following graph shows common plants and their compatible neighbors. Each circle is a plant, and circles that are connected with a line are compatible. It is known by the garden community that plants that grow well together go well together" in the kitchen. Explore the network graph to learn more about herbs and vegetables that you like to eat.
+    </p>
+
+    <button id="cont-click">Click to explore</button>
+</div>
+
+<!-- NETWORK GRAPH -->
+<h2 id="foodnet-title">Food Network</h2>
+<div class="step" data-step="4">
+
+    <p class = "descrip">These plants are compatible in the garden and the kitchen. <br> 
+        <strong>Hover</strong> on your favorites to learn more. <strong>Pull</strong> circles for a different view.</p>
+</div>
+
+<div class="step flex-side container">
+    <svg id="foodnetwork" height="600" width="1000"></svg>
+    <div class="flex-vert">
+        <h3>Plant Information</h3>
+        <div id="sidebar-content" style="height: 500px; width: 200px;"></div>
+        <img class="scroll-text2" id="arrow3" src="images/down-arrow.png" alt="Scroll down arrow" height="40px" width="40px">
+    </div>
+</div>
+
+<div id="text-div4">
+    <p class="writing2"> Since March 2022, food prices have increased by 8.3% (<a href ="https://www.ers.usda.gov/data-products/food-price-outlook/summary-findings/" target="_blank">USDA</a>).
+        By growing your own food you are less affected by rising food price and food shocks. The <a href ="https://www.thepacker.com/news/education/2022-fresh-trends-report-reveals-top-20-fruit-and-vegetables" target="_blank">Packer's 2022 Fresh Trends survey</a> reveals that potatoes, tomatoes, onions, carrots, and bell peppers were the most purchased vegetables by Americans in 2022. The same survey found that Americans actively tried to save money either by tightening their budget in other ares (43% of respondents) or buying less food (30%). Growing even one crop in a home garden can help Americans save money on their food budget. Additionally, home gardening produces more flavorful and nutritious edible plants that do not not travel thousands of miles before reaching the kitchen (<a href ="https://extension.illinois.edu/blogs/ilriverhort/2020-08-03-grow-your-own-vegetables-benefit-your-health-and-environment" target="_blank">University of Illinois Urbana-Champaign</a>).</p>
+
+    <p class="writing2">Use the <strong>Recipe Generator</strong> for inspiration! Before buying seeds, find the recipes and ingredients that spark your interest. </p>
+
+    <button id="cont-click2">Click to explore</button>
+</div>
+
+<h2 id="recipegen">Welcome to your Recipe Generator</h2>
+<div class = "container">
+    <!-- <h3>Please harvest plant(s) to get a randomly assigned recipe!</h3> -->
+    <div class="row">
+        <div class="col-sm-7">
+            <div id="shopping" class = "row"></div>
+        </div>
+        <div class="col-sm-5">
+            
+            <div id="cart">
+                <h3 class = "recipes fantasy">Please harvest plant(s) to start cooking!</h3>
+            </div>
+        </div>
+    </div> 
+</div>
+<div class = "footer" height = "300px">
+    <img src="images/down-arrow.png" id="uparrow" alt="Scroll up arrow" height="40px" width="40px">
+    <p class = "footer"> Plant Your Own Produce - Medha Bulumulla, Hannah Rudt, Brett Schlesinger © </p>
+</div>
+
+
+
+<script>
+// ---------- HEADER SCROLL ----------
+// SOURCE: https://coolcssanimation.com/element-fade-out-on-scroll/
+    var titlePage = document.getElementById('title-div');
+
+    function fadeOutOnScroll(element) {
+        if (!element) {
+            return;
+        }
+        
+        var distanceToTop = window.pageYOffset + element.getBoundingClientRect().top;
+        var elementHeight = element.offsetHeight;
+        var scrollTop = document.documentElement.scrollTop;
+        
+        var opacity = 1;
+        
+        if (scrollTop > distanceToTop) {
+            opacity = 1 - (scrollTop - distanceToTop) / elementHeight;
+        }
+        
+        if (opacity >= 0) {
+            element.style.opacity = opacity;
+        }
+    }
+
+    function scrollHandlerTitle() {
+        fadeOutOnScroll(titlePage);
+    }
+
+    window.addEventListener('scroll', scrollHandlerTitle);
+
+    // ---------- TEXT SCROLL ----------
+    var textDiv1 = document.getElementById('text-div1');
+    function scrollHandlerText() {
+        fadeOutOnScroll(textDiv1);
+    }
+    window.addEventListener('scroll', scrollHandlerText);
+
+    var textDiv2 = document.getElementById('text-div2');
+    function scrollHandlerText2() {
+        fadeOutOnScroll(textDiv2);
+    }
+    window.addEventListener('scroll', scrollHandlerText2);
+    
+
+    // ---------- IMAGE SCROLL ----------
+    var imageDiv = document.getElementById('image-div');
+    function scrollHandlerImage() {
+        fadeOutOnScroll(imageDiv);
+    }
+
+    window.addEventListener('scroll', scrollHandlerImage);
+    
+
+    // ------- CLICK SCROLL -------
+    // arrow 1
+    let arrow1 = document.querySelector('#arrow1');
+    let barClick = document.querySelector('#barID');
+
+    arrow1.addEventListener('click', function () {
+        barClick.scrollIntoView({behavior: 'smooth', block: "center"});
+    });
+
+    // arrow 2
+    let arrow2 = document.querySelector('#arrow2');
+    let rewardText = document.querySelector('#writing2id');
+
+    arrow2.addEventListener('click', function () {
+        rewardText.scrollIntoView({behavior: 'smooth', block: "center"});
+    });
+
+    // arrow 3
+    let arrow3 = document.querySelector('#arrow3');
+    let priceText = document.querySelector('#text-div4');
+
+    arrow3.addEventListener('click', function () {
+        priceText.scrollIntoView({behavior: 'smooth', block: "center"});
+    });
+
+    // up arrow
+    let uparrow = document.querySelector('#uparrow');
+    let topDoc = document.querySelector('#titlediv');
+
+    uparrow.addEventListener('click', function () {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+
+
+    // button to network
+    let btn = document.querySelector('#cont-click');
+    let net = document.querySelector('#foodnet-title');
+
+    btn.addEventListener('click', function () {
+        net.scrollIntoView({behavior: 'smooth'});
+    });
+
+    // button to recipe gen
+    let btn2 = document.querySelector('#cont-click2');
+    let recipe = document.querySelector('#recipegen');
+
+    btn2.addEventListener('click', function () {
+        recipe.scrollIntoView({behavior: 'smooth'});
+    });
+
+    // ------- SCROLLAMA ----------
+    var scrolly = document.querySelector("#scrolly");
+    var article = scrolly.querySelector("article");
+    var step = article.querySelectorAll(".step");
+
+    // initialize the scrollama
+    var scroller = scrollama();
+
+    // scrollama event handlers
+    function handleStepEnter(response) {
+        // add to color to current step
+        // response.element.classList.add("is-active");
+
+        switch (response.index) {
+            case 0:
+                // barChartArea.attr("opacity", 0)
+                console.log(response.index)
+            case 1:
+                console.log(response.index)
+            case 2: 
+                console.log(response.index)
+            case 3:
+                // if index 3, animate
+                console.log(response.index)
+                console.log("animating")
+                barChartArea.selectAll("rect")
+                    .transition()
+                    .duration(800)
+                    // .attr("opacity", 1)
+                    .attr("y", function (d) {
+                        return countScale(d['recipeCount']);
+                    })
+                    .attr("height", function (d) {
+                        return barChartHeight - countScale(d['recipeCount']);
+                    })
+                    .delay(function (d, i) {
+                            return (i * 100)
+                        }
+                    )
+        }
+
+        // a big switch statement
+        // have a case for each of the pages
+        // all the blocks need to be the correct height so the animation has space to work
+        // need to have a CSS height set
+    }
+
+    function handleStepExit(response) {
+        console.log(response);
+    }
+
+    function init() {
+        // set random padding for different step heights (not required)
+        step.forEach(function (step) {
+            // var v = 100 + Math.floor((Math.random() * window.innerHeight) / 4);
+            step.style.padding = "30px";
+        });
+
+        // 1. setup the scroller with the bare-bones options
+        // 		this will also initialize trigger observations
+        // 2. bind scrollama event handlers (this can be chained like below)
+        scroller
+            .setup({
+                step: "#scrolly article .step",
+                debug: false,
+                offset: 0.9
+            })
+            .onStepEnter(handleStepEnter)
+            .onStepExit(handleStepExit);
+
+    }
+
+    init();
+</script>
+
+<script>
+    //////////////////// BAR CHART ////////////////////
+    const bar = d3.select("svg#bar");
+    const barMargin = {top: 10, right: 20, bottom: 100, left: 100};
+    const barChartWidth = bar.attr("width") - barMargin.left - barMargin.right;
+    const barChartHeight = bar.attr("height") - barMargin.top - barMargin.bottom;
+
+    let barAnnotations = bar.append("g").attr("id", "barAnnotations");
+    let barChartArea = bar.append("g").attr("id", "bars")
+        .attr("transform", "translate(" + barMargin.left + "," + barMargin.top + ")");
+
+    // HELPER FUNCTIONS: https://linuxhint.com/remove-all-elements-with-specific-class-using-javascript/
+    function removeElements(className) {
+        let cn = document.querySelectorAll(className);
+        cn.forEach(d => {
+            d.remove();
+        });
+    }
+
+    function removeFromList(list, element) {
+        list.splice(list.indexOf(element), 1);
+    }
+    
+    var countScale;
+
+
+    async function plantData() {
+        let plant_data = await d3.csv("plant-clean.csv", d3.autoType);
+        console.log(plant_data);
+
+
+        function createBar(col) {
+            // sort data for top 15
+            const sorted = plant_data.sort((a, b) => d3.descending(a[col], b[col]));
+            const top15 = sorted.filter(function (d, i) {
+                return i < 15;
+            });
+
+            console.log(top15)
+
+            // SCALES
+            // x axis, plant, categorical scalePoint()
+            const plantNames = top15.map((d) => d["name1"]);
+            const plantScale = d3.scalePoint().domain(plantNames).range([0, barChartWidth]);
+
+            // y axis, DBH, continuous scaleLinear()
+            const countExtent = d3.extent(top15, d => d[col]);
+            countScale = d3.scaleLinear().domain([0, 4700]).range([barChartHeight, 0]).clamp(true);
+
+            // AXES
+            // y axis
+            let leftAxis = d3.axisLeft(countScale)
+                .tickFormat(d3.format("0"))
+            let leftGridlines = d3.axisLeft(countScale)
+                .tickSize(-barChartWidth - 40)
+                .tickFormat("")
+
+            barAnnotations.append("g")
+                .attr("class", "yAxis")
+                .attr("transform", `translate(${barMargin.left - 20},${barMargin.top})`)
+                .call(leftAxis)
+            barAnnotations.append("g")
+                .attr("class", "yGridlines")
+                .attr("transform", `translate(${barMargin.left - 20},${barMargin.top})`)
+                .call(leftGridlines);
+
+            // x axis
+            let bottomAxis = d3.axisBottom(plantScale);
+            d3.axisBottom(plantScale)
+                .tickSize(-barChartHeight - 10)
+                .tickFormat("")
+
+            // Select all on all the text elements in the axis and add a transform rotate
+            barAnnotations.append("g")
+                .attr("class", "xAxis")
+                .attr("transform", `translate(${barMargin.left},${barChartHeight + barMargin.top + 10})`)
+                .call(bottomAxis)
+                .selectAll("text")
+                .style("text-anchor", "end")
+                .style("font-size", "1.2em")
+                .attr("dx", "-.5em")
+                .attr("dy", ".30em")
+                .attr("transform", "rotate(-45)");
+
+            // add bars
+            let bars = barChartArea.selectAll("bar").data(top15)
+                .join("rect")
+                .attr("class", "bar")
+                .attr("x", d => plantScale(d['name1']) - 10)
+                .attr("y", d => countScale(d[col]))
+                .attr("width", 20)
+                // .attr("height", d => barChartHeight - countScale(d[col]))
+                .attr("height", function (d) {
+                    return barChartHeight - countScale(0);
+                }) // always equal to 0
+                .attr("y", function (d) {
+                    return countScale(0);
+                })
+                .attr("fill", "darkgreen");
+
+
+            //////////////////// MOUSEOVER /////////////////////
+            const mouseover = bar.append("g").attr("class", "mouseover")
+                .attr("transform", `translate(${barMargin.left + 30},${barMargin.top + 18})`);
+
+            // from INFO 3300 22.09.28
+            function stringLen(str) {
+                const dummytext = mouseover.append("text").attr("class", "legendtext").attr("visibility", "hidden");
+                dummytext.text(str)
+                let len = dummytext.node().getComputedTextLength()
+                dummytext.remove()
+                return len;
+            }
+
+            const frame = mouseover.append("rect").attr("class", "frame")
+                .attr("x", 0).attr("y", 0)
+                .attr("rx", 5).attr("ry", 5)
+                .attr("height", 45)
+            const textbox = mouseover.append("g").attr("transform", "translate(10,10)");
+            const format = d3.format(',d');  // comma for numbers
+
+            function updateMouseover(d) {
+                textbox.html('');  // start w empty element
+
+                let text = `There are ${format(d['recipeCount'])} recipes that use ${d['name1']}.`;
+
+                let maxWidth = Math.max(stringLen(text))
+                frame.attr("width", maxWidth + 20);
+
+                textbox.append("text").text(text)
+                    .attr("x", 0).attr("y", 10);
+            }
+
+
+            bars.on("mouseover", function () {
+                mouseover.attr("visibility", "");
+                updateMouseover(d3.select(this).datum())
+                d3.select(this)
+                    .attr("fill", "chocolate")
+            });
+
+            bars.on("mouseout", function () {
+                mouseover.attr("visibility", "hidden")
+                d3.select(this)
+                    .attr("fill", "darkgreen")
+            });
+        }
+
+        createBar('recipeCount');
+
+    }
+
+    
+    // BEGIN NETWORK CHART CODE
+    const network = d3.select("svg#foodnetwork");
+    const networkMargin = {top: 50, right: 100, bottom: 100, left: 100};
+    const networkWidth = network.attr("width") - networkMargin.left - networkMargin.right;
+    const networkHeight = network.attr("height") - networkMargin.top - networkMargin.bottom;
+
+    async function makeNetworkChart() {
+
+        let plant_data = await d3.csv("plant-clean.csv", d3.autoType);
+        // Read the CSV file
+        const data = await d3.csv("adj_matrix_subset.csv");
+
+        // Extract the node names from the column titles
+        const nodeNames = data.columns.slice(1);
+
+        // Create nodes and edges from the adjacency matrix
+        const nodes = nodeNames.map((name, index) => ({name, index}));
+        const edges = [];
+
+        // ISSUE make a c style for loop, 2 loops to go thru labels & separate loop to go thru the rest
+        data.forEach((row, rowIndex) => {
+            if (rowIndex > 0) {
+                nodeNames.forEach((name, colIndex) => {
+                    if (parseInt(row[name]) === 1) {
+                        edges.push({source: rowIndex - 1, target: colIndex});
+                    }
+                });
+            }
+        });
+        // Create a force simulation for the network layout
+        const simulation = d3.forceSimulation(nodes)
+            .force("link", d3.forceLink(edges).distance(100))
+            .force("charge", d3.forceManyBody().strength(-500))
+            .force("center", d3.forceCenter(networkWidth / 2, networkHeight / 2))
+            .on("tick", ticked);
+
+        // Create an SVG element to display the network chart
+        const svg = d3.select("svg#foodnetwork")
+            .append("g")
+            .attr("transform", `translate(${networkMargin.left}, ${networkMargin.top})`)
+            .attr("style", "width: 100%; height: auto; height: intrinsic;")
+
+        // Add lines for the edges
+        const link = svg.append("g")
+            .attr("class", "links")
+            .selectAll("line")
+            .data(edges)
+            .enter()
+            .append("line")
+            .attr("stroke", "#999")
+            .attr("stroke-opacity", 0.6);
+            // .attr("stroke-width", "2px");
+
+        // Add circles for the nodes
+        const node = svg.append("g")
+            .attr("class", "nodes")
+            .selectAll("g")
+            .data(nodes)
+            .enter()
+            .append("g")
+            .on("mouseover", mouseover)
+            .on("mouseout", mouseout)
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        node.append("circle")
+            .attr("r", 8)
+            .attr("fill", "darkgreen")
+            .attr("stroke", "#070303")
+
+        node.append("text")
+            .text(d => d.name.replace(/(^|_)(\w)/g, (_, separator, letter) => (separator === "_" ? " " : "") + letter.toUpperCase()))
+            .attr("x", 10)
+            .attr("y", 4);
+
+        function ticked() {
+            link.attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node.attr("transform", d => `translate(${d.x}, ${d.y})`);
+        }
+
+        const sidebar = d3.select("#sidebar-content");
+
+        function mouseover(event, d) {
+            d3.select(this).select("circle")
+                .attr("fill", "chocolate");
+            const connectedEdges = edges.filter(edge => edge.source === d || edge.target === d);
+            link.style("stroke", edge => {
+                if (connectedEdges.includes(edge)) {
+                    return "chocolate";
+                } else {
+                    return "#999";
+                }
+            })
+                .style("stroke-opacity", edge => {
+                    if (connectedEdges.includes(edge)) {
+                        return 1;
+                    } else {
+                        return 0.6;
+                    }
+                })
+                .attr("stroke-width", edge => {
+                    if (connectedEdges.includes(edge)) {
+                        return '3px';
+                    } else {
+                        return '1px';
+                    }
+                });
+
+            // Highlight connected nodes
+            node.select("circle")
+                .attr("fill", nodeData => {
+                    if (connectedEdges.find(edge => edge.source === nodeData || edge.target === nodeData)) {
+                        return "chocolate";
+                    } else {
+                        return "darkgreen";
+                    }
+                });
+
+            // Get connected nodes' names
+            const connectedNodesNames = connectedEdges.map(edge => edge.source === d ? edge.target.name : edge.source.name);
+            const formattedConnectedNodesNames = connectedNodesNames.map(name => name.replace(/(^|_)(\w)/g, (_, separator, letter) => (separator === "_" ? " " : "") + letter.toUpperCase()));
+
+            let selectedData = plant_data.filter(function (da) {
+                return da.name1Lower == d.name;
+            });
+
+
+            if (selectedData.length === 1) {
+                const selectedCrop = selectedData[0];
+                sidebar.html(`
+                <p> You have selected <strong>${d.name.replace(/(^|_)(\w)/g, (_, separator, letter) => (separator === "_" ? " " : "") + letter.toUpperCase())}</strong>. 
+                <br> 
+                <p> You can plant and cook this with ${formattedConnectedNodesNames.join(", ")}! </p>
+                <br> 
+                <p> This plant can grow in temp <strong>${selectedCrop.soilTempMinF} to ${selectedCrop.soilTempMaxF} degrees F</strong>. </p>
+                <br> 
+                <p> It takes <strong>${selectedCrop.harvestMinWks} to ${selectedCrop.harvestMaxWks} weeks to grow</strong>. </p>
+                <br> 
+                <p> You should space the seeds <strong>${selectedCrop.spaceMinIn} to ${selectedCrop.spaceMaxIn} inches apart</strong>.</p>
+                `);
+            } else {
+                sidebar.html(`<p> You have selected <strong>${d.name.replace(/(^|_)(\w)/g, (_, separator, letter) => (separator === "_" ? " " : "") + letter.toUpperCase())}</strong>. </p> <br> 
+                <p> You can plant and cook this with ${formattedConnectedNodesNames.join(", ")}! </p>
+                <br> <p> We don't have planting information about this crop. </p>
+                `);
+            }
+        }
+
+        function mouseout() {
+            d3.select(this).select("circle")
+                .attr("fill", "darkgreen;");
+
+            link.style("stroke", "#999")
+                .style("stroke-opacity", 0.6)
+                .attr("stroke-width", "1px");
+
+            // Reset connected nodes to their original color
+            node.select("circle")
+                .attr("fill", "darkgreen");
+
+            // Clear the sidebar content
+            sidebar.html("");
+        }
+
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+
+        // //////////////// make  a shopping list
+        let ingredients = await d3.csv("ingredients-and-crops.csv", d3.autoType);
+        var selectedCrops = []
+        const shop = d3.select("#shopping");
+
+        let plant_data_subset = plant_data.filter(function (d) {
+            return d.imgPresent > 0;
+        })
+
+        plant_data_subset.forEach(d => {
+            d3.select("#shopping")
+                .append("div")
+                .attr("id", d['name1Lower'])
+                .attr("class", "shopDiv:active hover")
+                .style("width", "100px")
+                //.style("border-width", "2px")
+                //.style("border-style", "dotted")
+                .style("border-radius", "40px")
+                .style("border-color", "white")
+                .on("click", function () {
+                    purchaseSeeds(selectedCrops, d['name1'], d['name1Lower']);
+                    d3.selectAll("div#" + d['name1Lower']).classed("active", function () {
+                        return selectedCrops.includes(d['name1Lower']);
+        
+                    })
+                });;
+            d3.select("div#" + d['name1Lower'])
+                .append("img")
+                .attr("id", d['img'])
+                .attr("src", "images/clip-art/" +d['img'])
+                .attr("alt", d['name1'])
+                .style("width", "50px")
+                .style("height", "50px")
+                .attr("id", d['name1Lower'])
+                .attr("class", "shopButtons");
+                
+            d3.select("div#" + d['name1Lower'])
+            .append("figcaption")
+                .text(d['name1'])
+                .style("");
+        }
+    );
+
+        
+        const cart = d3.select("#cart");
+
+        function purchaseSeeds(selectedCrops, crop, cropLower) {
+
+            if (selectedCrops.includes(cropLower)) {
+                removeFromList(selectedCrops, cropLower);
+            } else {
+                selectedCrops.push(cropLower);
+            }
+            var selectedCropName = String(selectedCrops).replace('[', '').replace(']', '').replace(',', ', ');
+            let recipesSelected = ingredients.filter(function (d) {
+
+                var cropArr = d.cropList.replace(' ', '').split(",");
+                var selectedArr = selectedCropName.replace(' ', '').split(",");
+                return selectedArr.every( ai => cropArr.includes(ai) );
+
+            })
+            removeElements(".recipes");
+            // no crops are selected
+            if (selectedCrops.length == 0) {
+                d3.select("#cart")
+                    .append("h3")
+                    .text("Please harvest plant(s) to start cooking!")
+                    .attr("class", "recipes fantasy");
+                
+            } else {
+                // no recipes are available with given selection
+                if (recipesSelected.length == 0) {
+                    d3.select("#cart")
+                        .append("h3")
+                        .text("We do not have any recipes of the harvested plants, please pick new ones.")
+                        .attr("class", "recipes fantasy");
+
+                } else { // yay we can give something to the user!
+                    var recipeIdx = Math.floor(Math.random() *recipesSelected.length);
+                    var randomRecipe = recipesSelected[recipeIdx];
+                    var instrArr = randomRecipe.Instructions.split(". ");
+                    d3.select("#cart")
+                        .append("h3")
+                        .text(randomRecipe.Title)
+                        .attr("class", "recipes fantasy");
+                    // d3.select("#cart")
+                    //     .append("p")
+                    //     .text(randomRecipe.Instructions)
+                    //     .attr("class", "recipes cursive");
+                    instrArr.forEach(d => {
+                        d3.select("#cart")
+                            .append("p")
+                            .text(d)
+                            .attr("class", "recipes cursive");
+                    });
+                        
+                }
+            }
+
+        }
+
+
+    }
+
+
+    plantData();
+    makeNetworkChart();
+
+</script>
+
+</body>
+
+</html>
